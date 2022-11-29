@@ -105,16 +105,51 @@ int ** inicializa_matriz(int **mat, int linhas, int colunas){
 
 }
 
-void mostra_notas_alunos(){
+void mostra_resultado(){
 
     int i;
+    float maior_nota;
+    int count;
 
-    for(i=0;i<QTD_ALUNOS;i++){
-        printf("%.2f\n", aluno[i].nota);
+    maior_nota = aluno[PRIMEIRO_ALUNO].nota;
+
+    for(i=1;i<QTD_ALUNOS;i++){
+        if(aluno[i].nota > maior_nota){
+            maior_nota = aluno[i].nota;
+        }
+    }
+
+    if(maior_nota == 0){
+        return;
+    }
+
+    printf("%.1f\n", maior_nota);
+
+    count = 0;
+
+    for(i=1;i<QTD_ALUNOS;i++){
+        if(aluno[i].nota == maior_nota){
+            if(count > 0){
+                printf(" ");
+            }
+
+            printf("%d", (i + 1));
+            count++;
+        }
     }
 
 }
 
+void inicializa_matriz_aluno(){
+
+    int i;
+
+    for(i=0;i<QTD_ALUNOS;i++){
+        //free(aluno[i].mat);
+        aluno[i].mat = NULL;
+    }
+
+}
 
 void calculo_distancia(char palavra_padrao[20]){
 
@@ -228,11 +263,7 @@ void calculo_distancia(char palavra_padrao[20]){
         }
     }
 
-    //INICIALIZAR MATRIZ DO ALUNO
-    for(i=0;i<QTD_ALUNOS;i++){
-        //free(aluno[i].mat);
-        aluno[i].mat = NULL;
-    }
+    inicializa_matriz_aluno();
 
 }
 
@@ -305,9 +336,10 @@ void ditado(){
                                 aluno[QUINTO_ALUNO].palavra);
 
         calculo_distancia(palavra);
-        mostra_notas_alunos();
 
     }
+
+    mostra_resultado();
 
 }
 
