@@ -127,7 +127,7 @@ void mostra_resultado(){
 
     count = 0;
 
-    for(i=1;i<QTD_ALUNOS;i++){
+    for(i=0;i<QTD_ALUNOS;i++){
         if(aluno[i].nota == maior_nota){
             if(count > 0){
                 printf(" ");
@@ -137,6 +137,8 @@ void mostra_resultado(){
             count++;
         }
     }
+
+    printf("\n");
 
 }
 
@@ -162,6 +164,10 @@ void calculo_distancia(char palavra_padrao[20]){
     float nota[QTD_ALUNOS];
 
     alguem_acertou = 0;
+
+    for(i=0;i<QTD_ALUNOS;i++){
+        nota[i] = 0;
+    }
 
     for(k=0;k<QTD_ALUNOS;k++){
 
